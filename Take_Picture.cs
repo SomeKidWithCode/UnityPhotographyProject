@@ -12,6 +12,7 @@ public class Take_Picture : MonoBehaviour
     public int resWidth = 2550;
     public int resHeight = 3300;
     private bool takeHiResShot = false;
+    public bool isPictureTaker = false;
 
     void Start()
     {
@@ -21,6 +22,11 @@ public class Take_Picture : MonoBehaviour
         
         Debug.Log("Main cam: " + Camera.main);
     }
+
+    void SetAsPictureTaker()
+        => isPictureTaker = true;
+    void UnsetPictureTaker()
+        => isPictureTaker = false;
 
     public static string ScreenShotName(int width, int height)
         => Path.Combine(Application.dataPath, "../Pictures", $"screen_{width}x{height}_{System.DateTime.Now:yyyy-MM-dd_HH-mm-ss}.png");
@@ -32,6 +38,8 @@ public class Take_Picture : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!isPictureTaker)
+            return;
         takeHiResShot |= Input.GetKeyDown(KeyCode.K);
         if (takeHiResShot)
             TakeAPicture();

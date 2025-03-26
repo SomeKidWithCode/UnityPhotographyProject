@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class CameraToggle : MonoBehaviour
 {
     public Camera playerOriginCam;
-    public Camera cameraCamera;
+    Camera cameraCamera;
     bool activateSwitch = false;
 
     void Start()
@@ -14,8 +14,7 @@ public class CameraToggle : MonoBehaviour
         if (playerOriginCam == null)
             throw new System.Exception("playerOriginCam MUST be set");
 
-        if (cameraCamera == null)
-            throw new System.Exception("cameraCamera MUST be set");
+        cameraCamera = GetComponent<Camera>();
     }
 
     private void LateUpdate()
