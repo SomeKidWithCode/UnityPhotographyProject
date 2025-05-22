@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class TableGenerator : MonoBehaviour
@@ -35,11 +33,14 @@ public class TableGenerator : MonoBehaviour
             // Make the new table look at the original
             go.transform.LookAt(startingTable.transform);
 
+            // Turn the table 180 degrees to face outwards
+            go.transform.Rotate(new Vector3(0, 180, 0));
+
             // Must destroy the duplicated objects TableGenerator so it doesn't try to also generate tables
             Destroy(go.GetComponent<TableGenerator>());
         }
 
-        // Delete the original table, as this is the one that just determines the circle center
+        // Delete the original table, as this is one just determines the circle's center
         Destroy(startingTable);
     }
 

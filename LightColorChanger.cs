@@ -1,37 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using System.IO;
+﻿using UnityEngine;
 
 public class LightColorChanger : MonoBehaviour
 {
+    public SliderController RedController;
+    public SliderController GreenController;
+    public SliderController BlueController;
+    public SliderController AlphaController;
+
     Light lightComp;
 
-    void Start()
-	{
+    void Start() =>
         lightComp = GetComponent<Light>();
-    }
 
-    bool toggleLight = false;
-    bool toggle = false;
+    private void LateUpdate() =>
+        ChangeLightColor(RedController.colorValue, GreenController.colorValue, BlueController.colorValue);
 
-    private void LateUpdate()
-    {
-        toggleLight |= Input.GetKeyDown(KeyCode.L);
-        if (toggleLight)
-        {
-            if (toggle)
-                ChangeLightColor(255, 0, 0);
-            else
-                ChangeLightColor(0, 255, 0);
-            toggle = !toggle;
-            toggleLight = false;
-        }
-    }
-
-    void ChangeLightColor(float r, float g, float b)
-	{
-		lightComp.color = new Color(r, g, b);
-	}
+    void ChangeLightColor(float r, float g, float b, float a = 1) =>
+		lightComp.color = new Color(r, g, b, a);
 }
